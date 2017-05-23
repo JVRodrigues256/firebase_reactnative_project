@@ -14,12 +14,12 @@ import UserName from './screens/forms/username';
 import Home from './screens/home';
 import * as firebase from 'firebase';
 var fireBaseconfig = {
-  apiKey: "AIzaSyA3nNv_AiJn_SpPYC87bbA8EESBKUZ-Dcc",
-  authDomain: "fir-reactnative-project.firebaseapp.com",
-  databaseURL: "https://fir-reactnative-project.firebaseio.com",
-  projectId: "fir-reactnative-project",
-  storageBucket: "fir-reactnative-project.appspot.com",
-  messagingSenderId: "641559837822"
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: ""
 };
 const firebaseApp = firebase.initializeApp(fireBaseconfig);
 
