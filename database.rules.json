@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "users": {
+      "$user": {
+        ".read": "auth.uid === $user || root.child('users').child(auth.uid).child('isAdmin').val() == true",
+        ".write": "auth.uid === $user || root.child('users').child(auth.uid).child('isAdmin').val() == true",
+        ".validate": "(newData.child('isAdmin').val() != true) || (root.child('users').child(auth.uid).child('isAdmin').val() == true)"
+      }
+    }
+  }
+}
