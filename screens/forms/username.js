@@ -11,7 +11,7 @@ import {
   Dimensions,
   TextInput,
 } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import * as firebase from 'firebase';
 import HomePage from '../homepage';
 
 const styles = StyleSheet.create({
@@ -44,8 +44,29 @@ export default class UserName extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       username: ''
     }
+  }
+  savename() {
+    this.setState({
+      loading: true
+    });
+    update() {
+      database().ref(`/users/${uid}`).update(newData);
+      this.setState({
+        nickname: '',
+        loading: false
+      });
+      this.props.navigator.push({
+        component: HomePage
+      });
+    }.catch((error) => {
+      this.setState({
+        loading: false
+      });
+      alert("Erro!");
+    });
   }
   render() {
     const { username } = this.state;
@@ -74,7 +95,7 @@ export default class UserName extends Component {
         <View style={{position: 'absolute', justifyContent: 'flex-end', alignItems: 'flex-end', left: 0, top: 0, bottom: 25, right: 25}}>
           <TouchableNativeFeedback
             disabled={!username}
-            onPress={<!-- -->}
+            onPress={this.savename.bind(this)}
             background={TouchableNativeFeedback.SelectableBackground()}>
             <View style={{height: 45, width: 85, borderRadius: 1, alignItems: 'center', justifyContent: 'center'}}>
               <Text style={{fontSize: 22.5, color: '#000000', textAlign: 'center'}}>Ir</Text>
