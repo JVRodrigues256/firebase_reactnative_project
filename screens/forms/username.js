@@ -48,24 +48,23 @@ export default class UserName extends Component {
       username: ''
     }
   }
-  savename() {
+  update = () => {
     this.setState({
       loading: true
     });
-    update() {
-      database().ref(`/users/${uid}`).update(newData);
+    firebase.database().ref(`/users/${uid}`).update(newData).then(() => {
       this.setState({
-        nickname: '',
-        loading: false
+        loading: false,
+        nickname: ''
       });
       this.props.navigator.push({
         component: HomePage
       });
-    }.catch((error) => {
+    }).catch((error) => {
       this.setState({
         loading: false
       });
-      alert("Erro!");
+      Alert.alert('Alerta', 'Falha ao salvar o apelido. Tente novamente!', [{text: 'OK', onPress: () = console.log('OK PRESSED')},]);
     });
   }
   render() {
@@ -95,7 +94,7 @@ export default class UserName extends Component {
         <View style={{position: 'absolute', justifyContent: 'flex-end', alignItems: 'flex-end', left: 0, top: 0, bottom: 25, right: 25}}>
           <TouchableNativeFeedback
             disabled={!username}
-            onPress={this.savename.bind(this)}
+            onPress={this.update.bind(this)}
             background={TouchableNativeFeedback.SelectableBackground()}>
             <View style={{height: 45, width: 85, borderRadius: 1, alignItems: 'center', justifyContent: 'center'}}>
               <Text style={{fontSize: 22.5, color: '#000000', textAlign: 'center'}}>Ir</Text>
